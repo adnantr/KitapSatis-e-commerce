@@ -2,16 +2,18 @@
 
 namespace KitapSatis.Controllers
 {
-    public class UserController : Controller
+    public class CustomerController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
+
         public IActionResult Login()
         {
             return View();
         }
+
         public IActionResult Register()
         {
             return View();

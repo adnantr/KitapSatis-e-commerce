@@ -1,0 +1,58 @@
+﻿ @model IEnumerable<KitapSatis.Models.Product>
+<div class="border p-4 bg-white">
+  <div class="row">
+      <div class="col-9">
+          <h2 class="text-dark">Ürün listesi</h2>
+      </div>
+     
+      <div class="col-3 text-right">
+           @await Html.PartialAsync("AddProduct")
+          @*<a asp-action=""><button type="button" class="btn-primary">Yeni Kayıt Ekle</button></a>*@
+      </div>
+  </div>
+
+
+
+  <div>
+      @if(Model.Count()>0)
+        {
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Ürün Id</th>
+                      <th scope="col">Ürün Adı</th>
+                      <th scope="col">Ürün Tanımı</th>
+                      <th scope="col">Kategori Id</th>
+                      <th scope="col">Fiyat</th>
+                      <th scope="col">Stok Adet</th>
+                      <th scope="col">Resim</th>
+                      <th scope="col"><i class="bi bi-arrow-down-up"></i></th>
+                    </tr>
+                  </thead>
+                    <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                      <th scope="row">@item.ProductId</th>
+                      <td>@item.ProductName</td>
+                      <td>@item.ProductDescription</td>
+                      <td>@item.CategoryId</td>
+                      <td>@item.Price</td>
+                      <td>@item.Stock</td>
+                      <td><img src="@item.Picture" class="" width="25" height="30"></td>
+                      <td>
+                          <a asp-action="" class="text-danger">
+                            <i class="bi bi-trash"></i>
+                          </a>
+                          <a asp-action="updateproduct" class="primary">
+                             <i class="bi bi-upload"></i>
+                          </a>
+                      </td>
+                    </tr>
+                }
+            </tbody>
+            </table>
+        }
+    </div>
+
+</div>
