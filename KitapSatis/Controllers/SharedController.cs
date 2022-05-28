@@ -15,11 +15,8 @@ namespace KitapSatis.Controllers
             _context = context;
 
         }
-        public IActionResult CategoryNavbar()
-        {
-           List<Category> objList = _context.Categories.ToList();
-            return View(objList);
-        }
+
+     
         public IActionResult Index()
         {
             return View();

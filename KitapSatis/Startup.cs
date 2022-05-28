@@ -1,4 +1,5 @@
 using KitapSatis.Data;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,7 @@ namespace KitapSatis
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")
             ));
+            //services.AddScoped<IProductRepository, EfProductRepository>();
             services.AddControllersWithViews();
         }
 

@@ -1,8 +1,24 @@
-﻿@{
-    ViewData["Title"] = "Admin Page";
+﻿@model List<Product>
+@{
+    ViewData["Ürünler"] = "Ürünler";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row">
+@foreach (var item in Model)
+{
+    <div class="col-md-3 mt-3">
+    <div class="card mb-2" style="width:215px; height:400px">
+      <img width="100" height="250" src="/img/productImages/@item.Picture" class="card-img-top" alt="...">
+      <div class="card-body">
+            <h5 class="card-title">@item.ProductName</h5>
+            <p class="card-text">Fiyat:@item.Price ₺</p>
+             <a asp-action="" asp-route-Id="" class="btn btn-danger btn-sm">
+                             Favori Ekle
+             </a>
+             <a asp-action="" asp-route-Id="" class="btn btn-primary btn-sm">
+                             Sepete Ekle
+             </a>
+      </div>
+     </div>
+    </div>
+}
 </div>

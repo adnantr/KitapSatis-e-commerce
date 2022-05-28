@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="Views\Category\" />
+    <Folder Include="Views\Admin\Components\" />
   </ItemGroup>
 
 </Project>

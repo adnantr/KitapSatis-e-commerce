@@ -21,14 +21,18 @@ namespace KitapSatis.Data
 
 
         public DbSet<CategoryProduct> CategoryProducts { get; set; }//Çok Çok İlişki
-        public DbSet<ProductKind> ProductKind { get; set; }
+        public DbSet<ProductKind> ProductKind { get; set; } //Çok Çok İlişki
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             modelBuilder.Entity<CategoryProduct>().HasKey(x => new { x.CategoryId, x.ProductId });
             modelBuilder.Entity<ProductKind>().HasKey(x => new { x.KindId, x.ProductId });
         }
-   
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //     optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=DbKitapSatis;Trusted_Connection=True");
+        //}
+
 
     }
 }
