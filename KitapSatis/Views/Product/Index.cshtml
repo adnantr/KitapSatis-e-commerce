@@ -2,12 +2,43 @@
 @{
     ViewData["Ürünler"] = "Ürünler";
 }
+
+
+@if(Model.Count==0)
+{
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="alert alert-danger">
+		Aradığınız kriterlere göre ürün bulunamadı!   
+        </div>
+    </div>
+    </div>
+}
+else
+{
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="alert alert-success">
+            @{
+                var sayi = Model.ToList().Count;
+            } 
+            @sayi adet ürün bulunmuştur.
+        </div>
+    </div>
+</div>
+}
+
+
+
+
 <div class="row">
 @foreach (var item in Model)
 {
     <div class="col-md-3 mt-3">
     <div class="card mb-2" style="width:215px; height:400px">
-      <img width="100" height="250" src="/img/productImages/@item.Picture" class="card-img-top" alt="...">
+        <a asp-controller="product"  asp-action="details" asp-route-Id="@item.ProductId">
+            <img width="100" height="250" src="/img/productImages/@item.Picture" class="card-img-top" alt="...">
+        </a>
       <div class="card-body">
             <h5 class="card-title">@item.ProductName</h5>
             <p class="card-text">Fiyat:@item.Price ₺</p>

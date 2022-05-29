@@ -18,7 +18,10 @@ namespace KitapSatis.Models
         public string Picture { get; set; }
 
         public ICollection<CategoryProduct> CategoryProducts { get; set; } //Çok Çok İlişki
-        public ICollection<ProductKind> ProductKinds { get; set; }
+        public ICollection<ProductKind> ProductKinds { get; set; } //Çok Çok İlişki
+        public ICollection<FavoriteProduct> FavoriteProduct { get; set; } //Çok Çok İlişki
+        public List<WeekProduct> WeekProduct { get; set; }
+
 
 
     }

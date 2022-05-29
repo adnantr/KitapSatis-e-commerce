@@ -199,6 +199,11 @@ namespace KitapSatis.Controllers
             return RedirectToAction(nameof(Category));
 
         }
+        public IActionResult WeekProduct(int ProductId)
+        {
+          
+            return View();
+        }
 
 
     }

@@ -27,7 +27,8 @@ namespace KitapSatis.Models
 
         public CreditCard CreditCard { get; set; } //Bire bir
         public Communication Communication { get; set; } //Bire bir
-        public List<Favorite> Favorite { get; set; } //Bire çok
+        public ICollection<FavoriteCustomer> FavoriteCustomer { get; set; }//çok çok
+        //public List<Favorite> Favorite { get; set; } //Bire çok
         //public Favorite Favorite { get; set; }
         //public Order Order { get; set; }
     }

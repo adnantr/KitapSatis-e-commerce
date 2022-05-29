@@ -24,6 +24,7 @@ namespace KitapSatis.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.productList = _db.Products.OrderByDescending(i=>i.ProductId).Take(8); //son 8 ürün( yeni ürünler)
             return View();
         }
 

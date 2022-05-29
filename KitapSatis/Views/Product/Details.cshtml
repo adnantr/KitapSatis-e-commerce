@@ -1,55 +1,54 @@
-<div class="row">
-            <div class="col-md-6">
+ï»¿@model Product
 
-                <img src="https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_88981234/mobile_786_587_png/LENOVO-81W1005RTX-IdeaPad-3-15.6%22-Ryzen-7-3700U-2.3-8GB-Ram-512GB-FHD-Win-10-Laptop-Platin-Gri" class="img-responsive w-100"></img>
-            </div>
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1>Laptop  #254789</h1>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        
-                        <Badge color="primary">
-                            Ürün no:
-                        </Badge>
-                        <span class="product-number">#254789</span>
-                    </div>
-                </div>
-
-
-
-
-                <div class="row">
-                    <div class="col-md-12">
-                        
-                        <h4 id="product-price">7500 TL</h4>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                       <button class="btn btn-success">
-                            Sepete Ekle
-                       </button>
-                    </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="description">
-                            DETAY BÖLÜMÜ
-                        </div>
-                    </div>
-                </div>
-
-                
-
-                
-
+<div class="row mt-4">
+    <div class="col-md-6">
+        <img src="/img/productImages/@Model.Picture" width="300" height="500" class="img-responsive w-100"></img>
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>@Model.ProductName</h1>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <Badge color="primary">
+                    <b>ÃœrÃ¼n no:</b>
+                </Badge>
+                <span class="product-number">#@Model.ProductId</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h4 id="product-price">Fiyat: @Model.Price â‚º</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="description">
+                   <b>AÃ§Ä±klama:</b>
+                    @Model.ProductDescription
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-success">
+                    Sepete Ekle
+                </button>
+            </div>
+        </div>
+
+
+        
+
+
+
+
+
+    </div>
+</div>
