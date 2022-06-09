@@ -7,7 +7,7 @@ namespace KitapSatis.Models
     {
         [Key]
         public int CategoryId { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Zorunlu bir alan")]
         public string CategoryName { get; set; }
 
         public ICollection<CategoryProduct> CategoryProducts { get; set; } //Çok Çok İlişki

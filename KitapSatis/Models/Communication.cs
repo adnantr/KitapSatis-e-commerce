@@ -12,6 +12,6 @@ namespace KitapSatis.Models
         public string Phone { get; set; }
 
 
-        public Customer Customer { get; set; }//Bire bir
+        public Customer CustomerDetail { get; set; }//Bire bir
     }
 }

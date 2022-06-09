@@ -4,11 +4,11 @@ namespace KitapSatis.Models
 {
     public class FavoriteCustomer
     {
-        [ForeignKey("Customer")]
-        public int CustomerId { get; set; }
+        [ForeignKey("CustomerDetail")]
+        public int CustomerDetailId { get; set; }
         [ForeignKey("Favorite")]
         public int FavoriteId { get; set; }
-        public Customer Customers { get; set; }
+        public CustomerDetail CustomerDetails { get; set; }
         public Favorite Favorites { get; set; }
     }
 }

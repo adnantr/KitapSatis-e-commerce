@@ -1,5 +1,7 @@
 ﻿using KitapSatis.Data;
+using KitapSatis.Identity;
 using KitapSatis.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
@@ -8,6 +10,7 @@ using System.Linq;
 
 namespace KitapSatis.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
 
@@ -16,7 +19,6 @@ namespace KitapSatis.Controllers
         {
             _db = db;
         }
-
         public IActionResult Index()
         {
             return View();
@@ -56,13 +58,17 @@ namespace KitapSatis.Controllers
                 {
                     //Ekleme işlemi
                     _db.Products.Add(obj);
+                    TempData["message"] = $"{obj.ProductName} isimli ürün eklenmiştir";
                 }
                 else
                 {
                     //Güncelleme işlemi
                     _db.Products.Update(obj);
+                    TempData["message"] = $"{obj.ProductName} isimli ürün güncellenmiştir";
+
                 }
                 _db.SaveChanges();
+                
                 return RedirectToAction(nameof(Product));
             }
 
@@ -74,6 +80,7 @@ namespace KitapSatis.Controllers
             var objDb = _db.Products.FirstOrDefault(a => a.ProductId == id);
             _db.Products.Remove(objDb);
             _db.SaveChanges();
+            TempData["message"] = $"{objDb.ProductName} isimli ürün silinmişir";
             return RedirectToAction(nameof(Product));
         }
 
@@ -110,11 +117,13 @@ namespace KitapSatis.Controllers
                 {
                     //Ekleme işlemi
                     _db.Categories.Add(obj);
+                    TempData["message"] = $"{obj.CategoryName} isimli kategori eklenmiştir";
                 }
                 else
                 {
                     //Güncelleme işlemi
                     _db.Categories.Update(obj);
+                    TempData["message"] = $"{obj.CategoryName} isimli kategori güncellenmiştir";
                 }
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Category));
@@ -122,12 +131,37 @@ namespace KitapSatis.Controllers
 
             return View(obj);
         }
-        public IActionResult DeleteCategory(int id) //route-Id den alıyor KIND İLE BENZERE ÇEVİR
+
+
+        public IActionResult DeleteCategory(int id) //route-Id den alıyor
         {
-            var objDb = _db.Categories.FirstOrDefault(a => a.CategoryId == id);
-            _db.Categories.Remove(objDb);
-            _db.SaveChanges();
+            var products = _db.Products.ToList();
+            foreach (var product in products)
+            {
+                if (product.CategoryId == id)
+                {
+                    TempData["message"] = " Silinecek kategoriye kayıtlı bir ürün bulunmaktadır lütfen önce onu siliniz.";
+                    return RedirectToAction(nameof(Category));
+                }
+                else
+                {
+                    var productControl = _db.Products.Where(a => a.CategoryId == id).ToList();
+
+                    if (!productControl.Any())
+                    {
+                        var objDb = _db.Categories.FirstOrDefault(a => a.CategoryId == id);
+                        _db.Categories.Remove(objDb);
+                        _db.SaveChanges();
+                        return RedirectToAction(nameof(Category));
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
             return RedirectToAction(nameof(Category));
+
         }
 
         public IActionResult AddUpdateKind(int? id) //Category.cshtml den geliyor
@@ -154,11 +188,13 @@ namespace KitapSatis.Controllers
                 {
                     //Ekleme işlemi
                     _db.Kinds.Add(obj);
+                    TempData["message"] = $"{obj.KindName} isimli tür eklenmiştir";
                 }
                 else
                 {
                     //Güncelleme işlemi
                     _db.Kinds.Update(obj);
+                    TempData["message"] = $"{obj.KindName} isimli tür güncellenmiştir";
                 }
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Category));
@@ -173,7 +209,7 @@ namespace KitapSatis.Controllers
             {
                 if (product.KindId == id)
                 {
-                    //string message = "Silinecek veride kayıtlı ürünler bulunmakta önce ürünleri siliniz.";
+                    TempData["message"] = " Silinecek türe kayıtlı bir ürün bulunmaktadır lütfen önce onu siliniz.";
                     return RedirectToAction(nameof(Category));
 
                 }
@@ -186,14 +222,12 @@ namespace KitapSatis.Controllers
                         var objDb = _db.Kinds.FirstOrDefault(a => a.KindId == id);
                         _db.Kinds.Remove(objDb);
                         _db.SaveChanges();
-                        //string message = "Başarıla silinmiştir";
+                        return RedirectToAction(nameof(Category));
                     }
                     else
                     {
 
                     }
-
-
                 }
             }
             return RedirectToAction(nameof(Category));

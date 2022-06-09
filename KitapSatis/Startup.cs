@@ -8,11 +8,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using KitapSatis.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace KitapSatis
 {
@@ -28,16 +32,51 @@ namespace KitapSatis
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
+            services.AddMvc();
+           
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")
             ));
-            //services.AddScoped<IProductRepository, EfProductRepository>();
-            services.AddControllersWithViews();
+            services.AddDbContext<ApplicationUserContext>(options => options.UseSqlServer(
+                Configuration.GetConnectionString("DefaultConnection")
+                ));
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationUserContext>().AddDefaultTokenProviders();
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true; //parolanýn içerisinde sayý olmasýný zorlarýz
+                options.Password.RequireLowercase = true;//büyük harf zorlama
+                options.Password.RequireUppercase = true;//küçük harf zorlama
+                options.User.RequireUniqueEmail = true; //her kullanýcýnýn farklý maili olmasýný zorlar
+                options.SignIn.RequireConfirmedEmail = false;   //e-posta doðrulama
+            });
+
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //    .AddCookie(x =>
+            //    {
+            //        x.LoginPath = "/customer/Login/";
+            //        x.LogoutPath = "/customer/logout/";
+            //    });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/Login/";
+                options.LogoutPath = "/Account/logout/";
+                //options.AccessDeniedPath = "Account/accessdenied"; //yetki (SAYFA HAZIRLA)
+                options.SlidingExpiration = true; //süreli oturum
+                options.Cookie = new CookieBuilder
+                {
+                    HttpOnly = true,
+                    Name = ".KitapSatis.Security.Cookie"
+                };
+
+            });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+            // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -59,7 +98,7 @@ namespace KitapSatis
             });
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

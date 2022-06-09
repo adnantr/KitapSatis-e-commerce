@@ -1,0 +1,64 @@
+@model RegisterModel
+@{
+    ViewData["Title"] = "User Register Page";
+}
+
+<div class="row ">
+
+    <div class="col-md-6 mt-5" style="width: 25rem;">
+        <img src="/img/register.png" class="card-img-top">
+    </div>
+    <div class="col-md-6 mt-5">
+        <form asp-controller="Account" asp-action="Register" method="post" >       
+            <div asp-validation-summary="All" class="text danger"></div>
+            
+            
+
+            <div class="form-group">
+                <label asp-for="FirstName">İsim</label>
+                <input asp-for="FirstName" type="text" class="form-control" name="FirstName">
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LastName">Soyisim</label>
+                <input asp-for="LastName" type="text" class="form-control" name="LastName">
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="UserName">Kullanıcı Adı</label>
+                <input asp-for="UserName" type="text" class="form-control" name="UserName">
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+
+           
+            <div class="form-group">
+                <label asp-for="Password">Şifre</label>
+                <input asp-for="Password" type="password" class="form-control" name="Password"  placeholder="Şifre">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="RePassword">Şifre</label>
+                <input asp-for="RePassword" type="password" class="form-control" name="RePassword"  placeholder="Şifre">
+                <span asp-validation-for="RePassword" class="text-danger"></span>
+            </div>
+
+            <div class="form-group"> 
+                <label asp-for="Email">E-mail</label>
+                <input asp-for="Email" type="email" class="form-control" name="Email" aria-describedby="emailHelp" placeholder="email@gmail.com"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary btn-lg">Kayıt Ol</button>
+            <a href="/account/login" class="text-decoration-none">Zaten bir üyeliğiniz var mı?</a>
+            
+        </form>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+}

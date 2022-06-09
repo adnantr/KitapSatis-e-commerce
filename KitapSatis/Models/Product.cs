@@ -8,19 +8,22 @@ namespace KitapSatis.Models
     {
         [Key]
         public int ProductId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Zorunlu bir alan")]
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
+        [Required(ErrorMessage = "Zorunlu bir alan")]
         public int KindId { get; set; }
+        [Required(ErrorMessage = "Zorunlu bir alan")]
         public int CategoryId { get; set; }
-        public double Price { get; set; }
-        public int Stock { get; set; }
+        [Required(ErrorMessage = "Zorunlu bir alan")]
+        public double? Price { get; set; }
+        public int? Stock { get; set; }
         public string Picture { get; set; }
 
         public ICollection<CategoryProduct> CategoryProducts { get; set; } //Çok Çok İlişki
         public ICollection<ProductKind> ProductKinds { get; set; } //Çok Çok İlişki
         public ICollection<FavoriteProduct> FavoriteProduct { get; set; } //Çok Çok İlişki
-        public List<WeekProduct> WeekProduct { get; set; }
+        
 
 
 

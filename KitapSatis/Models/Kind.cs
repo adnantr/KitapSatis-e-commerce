@@ -7,6 +7,7 @@ namespace KitapSatis.Models
     {
         [Key]
         public int KindId { get; set; }
+        [Required(ErrorMessage = "Zorunlu bir alan")]
         public string KindName { get; set; }
 
 

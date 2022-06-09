@@ -1,3 +1,4 @@
+
 <div class="container mt-2">
         <nav class="row navbar border border-dark">
             <div class="col-md-2">
@@ -12,25 +13,46 @@
                     <button class="btn btn-primary" type="submit">ARA</button>
                 </form>
             </div>
-            <div class="col-md-3">
-                <a href="#"> @*Favoriler *@
-                    <i class="bi bi-suit-heart btn btn-outline-danger"></i></a>
             
-                <a href="#"> @*Sepet *@
-                    <i class="bi bi-cart btn btn-outline-primary">Sepet</i></a>
+            <div class="col-md-3">
+                <a asp-controller="Account"  asp-action="Favorite" asp-route-Id=""> @*Favoriler *@
+                    <i class="bi bi-suit-heart btn btn-outline-danger"></i>
+                </a>
+            
+                <a asp-controller="Account"  asp-action="ShoppingBasket" asp-route-Id=""> @*Sepet *@
+                    <i class="bi bi-cart btn btn-outline-primary">Sepet</i>
+                </a>
                     
-
-                <div class="btn-group">
+                @if(User.Identity.IsAuthenticated)
+                {
+                     <div class="btn-group">   @*Kullanıcı işlemleri*@
+                        <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split"
+                            data-toggle="dropdown">
+                            <i class="bi bi-person-circle">@User.Identity.Name</i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="~/Account/Login">Hesap</a>
+                            <a class="dropdown-item" href="~/Account/ShoppingBasket">Sepet</a>
+                            <a class="dropdown-item" href="~/Account/Favorite">Favoriler</a>
+                            <a class="dropdown-item" href="~/Account/Logout">Oturumu Kapat</a>
+                        </div>
+                    </div>
+        
+                }
+                else
+                {
+                     <div class="btn-group">   @*Kullanıcı işlemleri*@
                     <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
                         data-toggle="dropdown">
                         Giriş
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="~/user/Login">Giriş Yap</a>
-                        <a class="dropdown-item" href="~/user/Register">Kayıt Ol</a>
+                        <a class="dropdown-item" href="~/Account/Login">Giriş Yap</a>
+                        <a class="dropdown-item" href="~/Account/Register">Kayıt Ol</a>
                     </div>
-                </div>
-        </div>
-            
-        </nav>
+                    </div>
+                }
+           
+        </div>   
+    </nav>
     </div>

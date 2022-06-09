@@ -8,8 +8,8 @@ namespace KitapSatis.Models
     {
         [Key]
         public int FavoriteId { get; set; }
-        [ForeignKey("Customer")]
-        public int CustomerId { get; set; }
+        [ForeignKey("CustomerDetail")]
+        public int CustomerDetailId { get; set; }
         [ForeignKey("Product")]
         public int ProductId { get; set; }
 

@@ -11,8 +11,14 @@
           <a asp-action="AddUpdateProduct" asp-controller="Admin" class="btn btn-primary">Ürün Ekle</a>
       </div>
   </div>
-
-  
+  @if (TempData["message"] != null)
+    {
+    <div class="alert alert-success" role="alert">
+        @TempData["message"]
+    </div>
+    }
+    
+    
 
   <div>
       @if(Model.Count()>0)

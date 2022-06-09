@@ -2,7 +2,7 @@
 
 namespace KitapSatis.Models
 {
-    public class Admin
+    public class Admin 
     {
         [Key]
         public int AdminId { get; set; }
