@@ -1,0 +1,16 @@
+﻿@model RoleModel
+
+<div class="row">
+    <div class="col-md-6 mt-5 ml-2">
+        <form method="post" asp-controller="Admin" asp-action="RoleCreate">
+            <div asp-validation-summary="All" class="text danger"></div>
+            <div class="form-group">
+                <label asp-for="Name">Kullanıcı Rolü</label>
+                <input asp-for="Name" type="text" class="form-control" name="Name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg">Rolü Ekle</button>
+        </form>
+    </div>
+</div>

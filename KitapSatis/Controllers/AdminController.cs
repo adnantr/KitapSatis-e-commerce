@@ -2,11 +2,13 @@
 using KitapSatis.Identity;
 using KitapSatis.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace KitapSatis.Controllers
 {
@@ -15,13 +17,46 @@ namespace KitapSatis.Controllers
     {
 
         private readonly ApplicationDbContext _db;
-        public AdminController(ApplicationDbContext db)
+        private UserManager<User> _userManager;
+        private RoleManager<IdentityRole> _roleManager;
+        public AdminController(ApplicationDbContext db, RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
         {
             _db = db;
+            _roleManager = roleManager;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
             return View();
+        }
+        public IActionResult RoleList()
+        {
+            return View(_roleManager.Roles);
+        }
+        [HttpGet]
+        public IActionResult RoleCreate()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> RoleCreate(RoleModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _roleManager.CreateAsync(new IdentityRole(model.Name));
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("RoleList");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            return View(model);
         }
         public IActionResult Product()
         {

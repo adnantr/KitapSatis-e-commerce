@@ -67,7 +67,8 @@ namespace KitapSatis
                 options.Cookie = new CookieBuilder
                 {
                     HttpOnly = true,
-                    Name = ".KitapSatis.Security.Cookie"
+                    Name = ".KitapSatis.Security.Cookie",
+                    SameSite=SameSiteMode.Strict
                 };
 
             });

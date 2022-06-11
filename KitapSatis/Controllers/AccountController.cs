@@ -11,7 +11,6 @@ namespace KitapSatis.Controllers
     {
         private readonly UserManager<User> _userManager; //user işlemleri
         private readonly SignInManager<User> _singInManager;//cookie işlemleri
-        private readonly ApplicationDbContext _db;
 
         public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
@@ -27,6 +26,7 @@ namespace KitapSatis.Controllers
             });
         }
         [HttpPost]
+        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Login(LoginModel model)
         {
             if (!ModelState.IsValid)
@@ -59,6 +59,7 @@ namespace KitapSatis.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterModel model)
         {
             if (!ModelState.IsValid)
