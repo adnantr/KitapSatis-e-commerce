@@ -90,7 +90,17 @@ namespace KitapSatis.Controllers
             return Redirect(model.RoleId);
             
         }
-       //roledelete yapılacak
+        
+        public async Task<IActionResult> RoleDelete(string id)
+        {
+            IdentityRole role = await _roleManager.FindByIdAsync(id);
+            IdentityResult result = await _roleManager.DeleteAsync(role);
+            if (result.Succeeded)
+            {
+                
+            }
+            return RedirectToAction("RoleList");
+        }
 
 
         public IActionResult RoleList()
