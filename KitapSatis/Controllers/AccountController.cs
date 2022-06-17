@@ -1,12 +1,15 @@
 ﻿using KitapSatis.Data;
 using KitapSatis.Identity;
 using KitapSatis.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace KitapSatis.Controllers
 {
+    [AutoValidateAntiforgeryToken]
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<User> _userManager; //user işlemleri
@@ -18,6 +21,7 @@ namespace KitapSatis.Controllers
             _singInManager = signInManager;
         }
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login(string ReturnUrl=null)
         {
             return View(new LoginModel()
@@ -26,7 +30,8 @@ namespace KitapSatis.Controllers
             });
         }
         [HttpPost]
-        [AutoValidateAntiforgeryToken]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginModel model)
         {
             if (!ModelState.IsValid)
@@ -52,6 +57,7 @@ namespace KitapSatis.Controllers
             await _singInManager.SignOutAsync();
             return RedirectToAction("index", "home");
         }
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Register()
         {
@@ -90,6 +96,11 @@ namespace KitapSatis.Controllers
             }
 
             return View(model);
+        }
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }

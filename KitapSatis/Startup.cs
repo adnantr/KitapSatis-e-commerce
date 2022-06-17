@@ -62,7 +62,7 @@ namespace KitapSatis
             {
                 options.LoginPath = "/Account/Login/";
                 options.LogoutPath = "/Account/logout/";
-                //options.AccessDeniedPath = "Account/accessdenied"; //yetki (SAYFA HAZIRLA)
+                options.AccessDeniedPath = "/Account/AccessDenied"; //yetki (SAYFA HAZIRLA)
                 options.SlidingExpiration = true; //süreli oturum
                 options.Cookie = new CookieBuilder
                 {

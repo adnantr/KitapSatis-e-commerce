@@ -1,12 +1,15 @@
-﻿@model List<Product>
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<KitapSatis.Identity.User>
 
 @section ListCss
 {
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    
 }
 @section ListScripts
 {
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https//cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
     <script>
         $(document).ready( function () {
         $('#myTable').DataTable();
@@ -17,12 +20,11 @@
 <div class="border p-4 bg-white">
   <div class="row">
       <div class="col-9">
-          <h2 class="text-dark">Ürün listesi</h2>
+          <h2 class="text-dark">Kullanıcı listesi</h2>
       </div>
      
       <div class="col-3 text-right">
-           @*@await Html.PartialAsync("AddProduct",Model)*@
-          <a asp-action="AddUpdateProduct" asp-controller="Admin" class="btn btn-primary">Ürün Ekle</a>
+          <a asp-action="UserCreate" asp-controller="Admin" class="btn btn-primary">Kullanıcı Ekle</a>
       </div>
   </div>
   <hr />
@@ -41,14 +43,11 @@
                 <table class="table" id="myTable">
                   <thead>
                     <tr>
-                      <th scope="col">Ürün Id</th>
-                      <th scope="col">Ürün Adı</th>
-                      <th scope="col">Ürün Tanımı</th>
-                      <th scope="col">Tür Id-Adı</th>
-                      <th scope="col">Kategori Id-Adı</th>
-                      <th scope="col">Fiyat</th>
-                      <th scope="col">Stok Adet</th>
-                      <th scope="col">Resim</th>
+                      <th scope="col">İsim</th>
+                      <th scope="col">Soyİsim</th>
+                      <th scope="col">KullanıcıAdı</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">OnaylıMı</th>
                       <th scope="col"><i class="bi bi-arrow-down-up"></i></th>
                     </tr>
                   </thead>
@@ -56,27 +55,29 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                      <th scope="row">@item.ProductId</th>
-                      <td>@item.ProductName</td>
-                      <td>@item.ProductDescription</td>
-                      <td>@item.KindId</td>
-                      <td>@item.CategoryId</td>
-                      <td>@item.Price</td> 
-                      <td>@item.Stock</td>
-                      <td><img class="img" src="/img/productImages/@item.Picture" width="25" height="30"></td>
+                      <th>@item.FirstName</th>
+                      <td>@item.LastName</td>
+                      <td>@item.UserName</td>
+                      <td>@item.Email</td>
+                      <td class="@(item.EmailConfirmed?"":"bg-warning")">@item.EmailConfirmed</td>
                       <td>
-                          <a asp-action="DeleteProduct" asp-route-Id="@item.ProductId" class="text-danger">
+                          <a asp-action="UserDelete" asp-route-Id="@item.Id" class="text-danger">
                             <i class="bi bi-trash"></i>
                           </a>
-                          
-                          <a asp-action="AddUpdateProduct" asp-route-Id="@item.ProductId" class="primary">
+                          <a asp-action="UserEdit" asp-route-Id="@item.Id" class="primary">
                              <i class="bi bi-upload"></i>
                           </a>
+                         
                       </td>
                     </tr>
                 }
             </tbody>
             </table>
+        }else
+        {
+            <div class="alert alert-warning">
+                <h3>Kullanıcı bulunamadı</h3>
+            </div>
         }
     </div>
 

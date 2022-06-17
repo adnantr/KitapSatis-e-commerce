@@ -1,0 +1,70 @@
+﻿@model UserDetailsModel
+
+<h1>Kullanıcı Düzenle</h1>
+<div class="row">
+    <div class="col-md-8">
+
+      <form asp-controller="admin" asp-action="UserEdit" method="post">
+          <div class="row p-3 border">
+          <div asp-validation-summary="All" class="text danger"></div>
+            <input type="hidden" name="UserId" value="@Model.UserId"/>
+          <div class="form-group row">
+
+                            
+                            <div class="form-group row">
+                            <label asp-for="FirstName" class="form-label">Kullanıcı İsim</label>
+                            <input asp-for="FirstName" placeholder="Ürün isim" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group row">
+                            <label asp-for="LastName" class="form-label">Kullanıcı Soyad</label>
+                            <input asp-for="LastName" placeholder="Ürün isim" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group row">
+                            <label asp-for="UserName" class="form-label">KullanıcıAdı</label>
+                            <input asp-for="UserName" placeholder="Ürün isim" class="form-control" />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group row">
+                            <label asp-for="Email" class="form-label">Email</label>
+                            <input asp-for="Email" placeholder="Ürün isim" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-4 offset-4">
+                                <button type="submit" class="btn btn-primary">Güncelle</button>
+                                <a asp-action="" class="btn-primary btn-success form-control">Geri Dön</a>
+                                </div>
+                            </div>
+                        
+
+
+                            <div class="col-md-4">
+                                @foreach (var item in ViewBag.Roles)
+                               {
+                                   <div class="custom-control custom-checkbox">
+                                       <input type="checkbox" class="custom-control-input" name="SelectedRoles" value="@item" id="@item"
+                                       @(Model.SelectedRoles.Any(i=>i==item)?"checked":"")>
+                                       <label class="custom-control-label" for="@item">@item</label>
+                                   </div>
+                               }
+                               <hr />
+                               <div class="custom-control custom-checkbox">
+                                   <input asp-for="EmailConfirmed" type="checkbox" class="custom-control-input" />
+                                   <label asp-for="EmailConfirmed" class="custom-control-label"></label>
+                               </div>
+                            </div>
+
+
+                    </div>
+                </div>         
+        </form>  
+
+
+
+    </div>
+</div>

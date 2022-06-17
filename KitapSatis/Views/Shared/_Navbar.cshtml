@@ -9,7 +9,7 @@
             
             <div class="col-md-7">
                 <form action="/product/index" class="d-flex">
-                    <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <input name="q" class="form-control me-2" style="width:500px;"  type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-primary" type="submit">ARA</button>
                 </form>
             </div>
@@ -31,10 +31,18 @@
                             <i class="bi bi-person-circle">@User.Identity.Name</i>
                         </button>
                         <div class="dropdown-menu">
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a class="dropdown-item" href="~/Admin">Admin Sayfası</a>
+                            <a class="dropdown-item" href="~/Account/Logout">Oturumu Kapat</a>
+                        }
+                        else
+                        {                        
                             <a class="dropdown-item" href="~/Account/Login">Hesap</a>
                             <a class="dropdown-item" href="~/Account/ShoppingBasket">Sepet</a>
                             <a class="dropdown-item" href="~/Account/Favorite">Favoriler</a>
                             <a class="dropdown-item" href="~/Account/Logout">Oturumu Kapat</a>
+                         }
                         </div>
                     </div>
         
