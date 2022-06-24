@@ -373,6 +373,18 @@ namespace KitapSatis.Controllers
             }
             return Redirect("~/admin/UserList");
         }
+        public async Task<IActionResult> UserDelete(string id)
+        {
+            User user = await _userManager.FindByIdAsync(id);
+            IdentityResult result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
+            {
+
+            }
+            return Redirect("~/admin/UserList");
+        }
+
+
 
         [HttpPost]
         public async Task<IActionResult> UserEdit(UserDetailsModel model,string[] selectedRoles)

@@ -15,14 +15,15 @@
             </div>
             
             <div class="col-md-3">
-                <a asp-controller="Account"  asp-action="Favorite" asp-route-Id=""> @*Favoriler *@
+                
+                <a asp-controller="Favorite"  asp-action="Index"> @*Favoriler *@
                     <i class="bi bi-suit-heart btn btn-outline-danger"></i>
                 </a>
-            
-                <a asp-controller="Account"  asp-action="ShoppingBasket" asp-route-Id=""> @*Sepet *@
+             
+                <a asp-controller="Cart"  asp-action="Index"> @*Sepet *@
                     <i class="bi bi-cart btn btn-outline-primary">Sepet</i>
                 </a>
-                    
+                  
                 @if(User.Identity.IsAuthenticated)
                 {
                      <div class="btn-group">   @*Kullanıcı işlemleri*@
@@ -45,7 +46,6 @@
                          }
                         </div>
                     </div>
-        
                 }
                 else
                 {
@@ -60,7 +60,9 @@
                     </div>
                     </div>
                 }
+            </div>
+            
            
-        </div>   
+           
     </nav>
     </div>

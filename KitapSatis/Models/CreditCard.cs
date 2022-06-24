@@ -13,6 +13,5 @@ namespace KitapSatis.Models
         
 
 
-        public Customer Customer { get; set; }//Bire bir
     }
 }

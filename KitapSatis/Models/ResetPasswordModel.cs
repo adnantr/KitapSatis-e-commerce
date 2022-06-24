@@ -2,14 +2,15 @@
 
 namespace KitapSatis.Models
 {
-    public class LoginModel
+    public class ResetPasswordModel
     {
         [Required]
-       public string UserName { get; set; }
+        public string Token { get; set; }
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        public string ReturnUrl { get; set; }
-        public string Email { get; internal set; }
     }
 }

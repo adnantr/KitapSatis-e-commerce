@@ -17,14 +17,19 @@ using System.Threading.Tasks;
 using KitapSatis.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
+using KitapSatis.Email;
+using KitapSatis.Repository;
+using KitapSatis.Abstract;
+using KitapSatis.Concrete;
 
 namespace KitapSatis
 {
     public class Startup
     {
+        private IConfiguration _configuration;
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -34,12 +39,27 @@ namespace KitapSatis
         {
             services.AddControllersWithViews();
             services.AddMvc();
-           
+
+            services.AddScoped<ICartRepository, EfCartRepository>();
+
+            services.AddScoped<ICartService, CartManager>();
+
+
+
+            services.AddScoped<IEmailService, Hotmail>(i =>
+                new Hotmail(
+                    _configuration["EmailSender:Host"],
+                    _configuration.GetValue<int>("EmailSender:Port"),
+                    _configuration.GetValue<bool>("EmailSender:EnableSSL"),
+                    _configuration["EmailSender:UserName"],
+                    _configuration["EmailSender:Password"])
+                );
+            
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
-                Configuration.GetConnectionString("DefaultConnection")
+                _configuration.GetConnectionString("DefaultConnection")
             ));
             services.AddDbContext<ApplicationUserContext>(options => options.UseSqlServer(
-                Configuration.GetConnectionString("DefaultConnection")
+                _configuration.GetConnectionString("DefaultConnection")
                 ));
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationUserContext>().AddDefaultTokenProviders();
             services.Configure<IdentityOptions>(options =>
@@ -48,15 +68,8 @@ namespace KitapSatis
                 options.Password.RequireLowercase = true;//büyük harf zorlama
                 options.Password.RequireUppercase = true;//küçük harf zorlama
                 options.User.RequireUniqueEmail = true; //her kullanýcýnýn farklý maili olmasýný zorlar
-                options.SignIn.RequireConfirmedEmail = false;   //e-posta doðrulama
+                options.SignIn.RequireConfirmedEmail = true;   //e-posta doðrulama
             });
-
-            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            //    .AddCookie(x =>
-            //    {
-            //        x.LoginPath = "/customer/Login/";
-            //        x.LogoutPath = "/customer/logout/";
-            //    });
 
             services.ConfigureApplicationCookie(options =>
             {

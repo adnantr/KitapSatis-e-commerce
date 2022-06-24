@@ -14,7 +14,6 @@ namespace KitapSatis.Models
         public int ProductId { get; set; }
 
         public ICollection<FavoriteProduct> FavoriteProduct { get; set; }//çok çok
-        public ICollection<FavoriteCustomer> FavoriteCustomer { get; set; }//çok çok
 
     }
 }
