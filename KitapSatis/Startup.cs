@@ -26,7 +26,7 @@ namespace KitapSatis
 {
     public class Startup
     {
-        private IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
         public Startup(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -41,8 +41,9 @@ namespace KitapSatis
             services.AddMvc();
 
             services.AddScoped<ICartRepository, EfCartRepository>();
-
             services.AddScoped<ICartService, CartManager>();
+            services.AddScoped<IFavoriteRepository, EfFavoriteRepository>();
+            services.AddScoped<IFavoriteService, FavoriteManager>();
 
 
 

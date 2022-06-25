@@ -9,5 +9,6 @@ namespace KitapSatis.Abstract
         
         void AddCart(string userId,int productId,int quantitiy);
         void DeleteFromCart(string userId, int productId);
+        void ClearCart(int cartId );
     }
 }

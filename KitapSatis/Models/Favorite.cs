@@ -7,13 +7,8 @@ namespace KitapSatis.Models
     public class Favorite
     {
         [Key]
-        public int FavoriteId { get; set; }
-        [ForeignKey("CustomerDetail")]
-        public int CustomerDetailId { get; set; }
-        [ForeignKey("Product")]
-        public int ProductId { get; set; }
-
-        public ICollection<FavoriteProduct> FavoriteProduct { get; set; }//çok çok
-
+        public int Id { get; set; }
+        public string UserId { get; set; }
+        public List<FavoriteItem> FavoriteItems { get; set; }
     }
 }

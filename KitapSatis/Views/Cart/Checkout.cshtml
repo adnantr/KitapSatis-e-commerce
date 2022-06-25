@@ -1,0 +1,99 @@
+﻿@model OrderModel
+
+<h1>Ödeme Ekranı</h1>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <h4 class="mb-3">Sipariş Detayı</h4>
+        <form method="post">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="@Model.FirstName">Adı</label>
+                    <input asp-for="@Model.FirstName" type="text" name="firstname" class="form-control"/>
+                </div>
+                 <div class="col-md-6">
+                    <label asp-for="@Model.LastName">Soyad</label>
+                    <input asp-for="@Model.LastName" type="text" name="lastname" class="form-control"/>
+                </div>
+                <div class="col-md-12">
+                    <label asp-for="@Model.Address">Adres</label>
+                    <textarea asp-for="@Model.Address" name="address" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label asp-for="@Model.City">Şehir</label>
+                    <input asp-for="@Model.City" type="text" name="city" class="form-control"/>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="@Model.Phone">Telefon</label>
+                    <input asp-for="@Model.Phone" type="text" name="phone" class="form-control"/>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="@Model.Email">Email</label>
+                    <input asp-for="@Model.Email" type="text" name="email" class="form-control"/>
+                </div>
+            </div>
+            <hr class="mb-3"/>
+
+            <h4 class="mb-3">Ödeme Bilgileri</h4>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label>Kart sahibi İsim</label>
+                    <input type="text" name="cartname" class="form-control"/>
+                </div>
+                <div class="row mb-3">
+                <div class="col-md-6">
+                    <label>Kredi Kart No</label>
+                    <input type="text" name="cartno" class="form-control"/>
+                </div>
+                <div class="col-md-6">
+                    <label>Ay</label>
+                    <input type="text" name="month" class="form-control"/>
+                </div>
+                <div class="col-md-6">
+                    <label>Yıl</label>
+                    <input type="text" name="year" class="form-control"/>
+                </div>
+                <div class="col-md-6">
+                    <label>CvC</label>
+                    <input type="text" name="cvc" class="form-control"/>
+                </div>
+                </div>
+
+            </div>
+
+
+             <button type="submit" class="btn-primary btn-success">Onayla</button>
+            </form>
+            
+    </div>
+    <div class="col-md-4">
+        <h4 class="mb-3"><span>Sipariş Özeti</span></h4>
+            <ul class="list-group mb-3">
+
+                @foreach (var item in Model.CartModel.CartItems)
+               {
+                   <li class="list-group-item d-flex justify-content-between">
+                    <div>
+                        <h6>@item.Name :</h6>
+                    </div>
+                    <span class="text-muted">@item.Price.ToString("c") ₺</span>
+                </li>
+               }
+                
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Toplam</span>
+                    <strong class="text-muted">@Model.CartModel.TotalPrice().ToString("c") ₺</strong>
+                </li>
+
+            </ul>
+           
+            </div>
+        
+
+
+        
+    
+
+</div>

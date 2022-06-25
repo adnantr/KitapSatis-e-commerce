@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace KitapSatis.Models
 {
     public class CategoryProduct
@@ -11,4 +12,5 @@ namespace KitapSatis.Models
         public Category Category { get; set; }
         public Product Product { get; set; }
     }
+
 }

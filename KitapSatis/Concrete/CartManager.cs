@@ -6,7 +6,7 @@ namespace KitapSatis.Concrete
 {
     public class CartManager : ICartService
     {
-        private ICartRepository _cartRepository;
+        private readonly ICartRepository _cartRepository;
         public CartManager(ICartRepository cartRepository)
         {
             _cartRepository = cartRepository;
@@ -33,6 +33,11 @@ namespace KitapSatis.Concrete
                 }
                 _cartRepository.Update(cart);
             }
+        }
+
+        public void ClearCart(int cartId)
+        {
+            _cartRepository.ClearCart(cartId);
         }
 
         public void DeleteFromCart(string userId, int productId)

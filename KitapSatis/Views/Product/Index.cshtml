@@ -42,9 +42,12 @@ else
       <div class="card-body">
             <h5 class="card-title">@item.ProductName</h5>
             <p class="card-text">Fiyat:@item.Price ₺</p>
-             <a asp-action="Cart" asp-route-Id="AddCart" class="btn btn-danger btn-sm">
-                             Favori Ekle
-             </a>
+
+              <form method="post" asp-controller="Favorite" asp-action="AddFavorite" style="display:inline;">
+                 <input type="hidden" name="ProductId" value="@item.ProductId">
+                 <button type="submit" class="btn btn-primary btn-sm">Favori Ekle</button>
+             </form>
+
              <form method="post" asp-controller="Cart" asp-action="AddCart" style="display:inline;">
                  <input type="hidden" name="ProductId" value="@item.ProductId">
                  <input type="hidden" name="quantity" value="1">

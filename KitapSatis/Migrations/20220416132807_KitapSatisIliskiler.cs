@@ -65,38 +65,7 @@ namespace KitapSatis.Migrations
                     table.PrimaryKey("PK_Kinds", x => x.KindId);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "OrderDetails",
-                columns: table => new
-                {
-                    OrderDetailId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Total = table.Column<double>(type: "float", nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderDetails", x => x.OrderDetailId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    OrderId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    PaymentId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.OrderId);
-                });
+            
 
             migrationBuilder.CreateTable(
                 name: "Products",
@@ -254,12 +223,6 @@ namespace KitapSatis.Migrations
 
             migrationBuilder.DropTable(
                 name: "Favorites");
-
-            migrationBuilder.DropTable(
-                name: "OrderDetails");
-
-            migrationBuilder.DropTable(
-                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "ProductKind");

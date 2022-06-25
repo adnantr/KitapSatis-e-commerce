@@ -30,11 +30,6 @@ namespace KitapSatis.Controllers
 
         public IActionResult Details(int? id)
         {
-            //List<Product> productList = _db.Products;
-            //if (id == null)
-            //{
-            //    return NotFound();
-            //}
             var productdetails = _db.Products.Where(x => x.ProductId == id).FirstOrDefault();
             if(productdetails==null)
             {

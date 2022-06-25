@@ -36,12 +36,14 @@ else{
            {
              <tr>
                 <td>
+                    <a asp-controller="product"  asp-action="details" asp-route-Id="@item.ProductId">
                     <img src="~/img/productImages/@item.ImageUrl" width="80" alt="">
+                    </a>
                 </td>
                 <td>@item.Name</td>
-                <td>@item.Price</td>
+                <td>@item.Price ₺</td>
                 <td>@item.Quantity</td>
-                <td>@(item.Quantity*item.Price)</td>
+                <td>@(item.Quantity*item.Price)₺</td>
                 <td>
 
                     <form asp-controller="Cart" asp-action="DeleteFromCart" method="post">
@@ -81,7 +83,7 @@ else{
                 <a href="/" class="btn btn-primary">
                     <i class="fa fa-arrow-circle-left fa-fw"></i> Alışverişe Devam Et
                 </a>
-                <a href="/checkout" class="btn btn-primary">
+                <a asp-controller="cart" asp-action="checkout" class="btn btn-primary">
                     <i class="fa fa-arrow-circle-right fa-fw"></i> Sepeti Onayla
                 </a>
             </div>

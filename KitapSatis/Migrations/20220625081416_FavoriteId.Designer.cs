@@ -4,14 +4,16 @@ using KitapSatis.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KitapSatis.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class AplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220625081416_FavoriteId")]
+    partial class FavoriteId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,6 +90,30 @@ namespace KitapSatis.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("CategoryProducts");
+                });
+
+            modelBuilder.Entity("KitapSatis.Models.Communication", b =>
+                {
+                    b.Property<int>("CommunicationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CommunicationId");
+
+                    b.ToTable("Communications");
                 });
 
             modelBuilder.Entity("KitapSatis.Models.CreditCard", b =>
@@ -169,55 +195,37 @@ namespace KitapSatis.Migrations
 
             modelBuilder.Entity("KitapSatis.Models.Order", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Note")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("OrderNumber")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderState")
+                    b.Property<int>("PaymentId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
+                    b.HasKey("OrderId");
 
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("KitapSatis.Models.OrderItem", b =>
+            modelBuilder.Entity("KitapSatis.Models.OrderDetail", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("OrderDetailId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
@@ -225,19 +233,15 @@ namespace KitapSatis.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
 
-                    b.HasIndex("OrderId");
+                    b.HasKey("OrderDetailId");
 
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("KitapSatis.Models.Product", b =>
@@ -347,25 +351,6 @@ namespace KitapSatis.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("KitapSatis.Models.OrderItem", b =>
-                {
-                    b.HasOne("KitapSatis.Models.Order", "Order")
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("KitapSatis.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("KitapSatis.Models.ProductKind", b =>
                 {
                     b.HasOne("KitapSatis.Models.Kind", "Kind")
@@ -403,11 +388,6 @@ namespace KitapSatis.Migrations
             modelBuilder.Entity("KitapSatis.Models.Kind", b =>
                 {
                     b.Navigation("ProductKinds");
-                });
-
-            modelBuilder.Entity("KitapSatis.Models.Order", b =>
-                {
-                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("KitapSatis.Models.Product", b =>

@@ -15,18 +15,26 @@ namespace KitapSatis.Controllers
     public class AccountController : Controller
     {
         private readonly ApplicationDbContext _db; //sepet işlemleri için
-        private  UserManager<User> _userManager; //user işlemleri
-        private  SignInManager<User> _singInManager;//cookie işlemleri
-        private  IEmailService _emailSend;
-        private ICartService _cartService;
+        private readonly UserManager<User> _userManager; //user işlemleri
+        private readonly SignInManager<User> _singInManager;//cookie işlemleri
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IEmailService _emailSend;
+        private readonly ICartService _cartService;
+        private readonly IFavoriteService _favoriteService;
 
-        public AccountController(ApplicationDbContext db, UserManager<User> userManager, SignInManager<User> signInManager, IEmailService emailSend, ICartService cartService)
+        public AccountController(ApplicationDbContext db, UserManager<User> userManager, SignInManager<User> signInManager, IEmailService emailSend, ICartService cartService, IFavoriteService favoriteService, RoleManager<IdentityRole> roleManager)
         {
             _db = db;
             _userManager = userManager;       
             _singInManager = signInManager;
             _emailSend = emailSend;
             _cartService = cartService;
+            _favoriteService = favoriteService;
+            _roleManager = roleManager;
+        }
+        public IActionResult Index()
+        {
+            return View();
         }
         [HttpGet]
         public IActionResult Login(string ReturnUrl=null)
@@ -91,17 +99,16 @@ namespace KitapSatis.Controllers
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 UserName = model.UserName,
-                Email = model.Email
-
+                Email = model.Email,
+                
             };
             var result = await _userManager.CreateAsync(user, model.Password);
+            var addRoleToUser = await _userManager.AddToRoleAsync(user, "Customer");
             if (result.Succeeded)
-            {
-                //cart
-                _cartService.InitializeCart(user.Id);
-
-                //cart
-
+            {         
+                _cartService.InitializeCart(user.Id); //kullanıcıya sepet atama
+                _favoriteService.InitializeFavorite(user.Id); //kullanıcıya favori atama
+                
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user); //token üretme
                 var url = Url.Action("ConfirmEmail", "Account", new
                 {

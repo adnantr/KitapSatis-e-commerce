@@ -19,10 +19,9 @@ namespace KitapSatis.Models
         public double? Price { get; set; }
         public int? Stock { get; set; }
         public string Picture { get; set; }
-
+        
         public ICollection<CategoryProduct> CategoryProducts { get; set; } //Çok Çok İlişki
         public ICollection<ProductKind> ProductKinds { get; set; } //Çok Çok İlişki
-        public ICollection<FavoriteProduct> FavoriteProduct { get; set; } //Çok Çok İlişki
         
 
 

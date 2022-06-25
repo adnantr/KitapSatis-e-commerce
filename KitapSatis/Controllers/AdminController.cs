@@ -17,8 +17,8 @@ namespace KitapSatis.Controllers
     {
 
         private readonly ApplicationDbContext _db;
-        private UserManager<User> _userManager;
-        private RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         public AdminController(ApplicationDbContext db, RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
         {
             _db = db;
