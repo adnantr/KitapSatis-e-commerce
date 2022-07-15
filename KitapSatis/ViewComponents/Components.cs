@@ -43,4 +43,5 @@ namespace KitapSatis.ViewComponents
             return View(objList);
         }
     }
+
 }

@@ -21,7 +21,6 @@
       </div>
      
       <div class="col-3 text-right">
-           @*@await Html.PartialAsync("AddProduct",Model)*@
           <a asp-action="AddUpdateProduct" asp-controller="Admin" class="btn btn-primary">Ürün Ekle</a>
       </div>
   </div>
@@ -44,40 +43,40 @@
                       <th scope="col">Ürün Id</th>
                       <th scope="col">Ürün Adı</th>
                       <th scope="col">Ürün Tanımı</th>
-                      <th scope="col">Tür Id-Adı</th>
-                      <th scope="col">Kategori Id-Adı</th>
+                      <th scope="col">Tür Id</th>
+                      <th scope="col">Kategori Id</th>
                       <th scope="col">Fiyat</th>
                       <th scope="col">Stok Adet</th>
                       <th scope="col">Resim</th>
                       <th scope="col"><i class="bi bi-arrow-down-up"></i></th>
                     </tr>
                   </thead>
-                    <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                      <th scope="row">@item.ProductId</th>
-                      <td>@item.ProductName</td>
-                      <td>@item.ProductDescription</td>
-                      <td>@item.KindId</td>
-                      <td>@item.CategoryId</td>
-                      <td>@item.Price</td> 
-                      <td>@item.Stock</td>
-                      <td><img class="img" src="/img/productImages/@item.Picture" width="25" height="30"></td>
-                      <td>
-                          <a asp-action="DeleteProduct" asp-route-Id="@item.ProductId" class="text-danger">
-                            <i class="bi bi-trash"></i>
-                          </a>
+                  <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                          <th scope="row">@item.ProductId</th>
+                          <td>@item.ProductName</td>
+                          <td class="boyut">@item.ProductDescription</td>
+                          <td>@item.KindId</td>
+                          <td>@item.CategoryId</td>
+                          <td>@item.Price</td> 
+                          <td>@item.Stock</td>
+                          <td><img class="img" src="/img/productImages/@item.Picture" width="25" height="30"></td>
+                          <td>
+                              <a asp-action="DeleteProduct" asp-route-Id="@item.ProductId" class="text-danger">
+                                <i class="bi bi-trash"></i>
+                              </a>
                           
-                          <a asp-action="AddUpdateProduct" asp-route-Id="@item.ProductId" class="primary">
-                             <i class="bi bi-upload"></i>
-                          </a>
-                      </td>
-                    </tr>
-                }
+                              <a asp-action="AddUpdateProduct" asp-route-Id="@item.ProductId" class="primary">
+                                 <i class="bi bi-upload"></i>
+                              </a>
+                          </td>
+                        </tr>
+                    }
             </tbody>
             </table>
         }
-    </div>
+  </div>
 
 </div>

@@ -73,10 +73,10 @@ namespace KitapSatis
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = "/Account/Login/";
-                options.LogoutPath = "/Account/logout/";
-                options.AccessDeniedPath = "/Account/AccessDenied"; //yetki (SAYFA HAZIRLA)
-                options.SlidingExpiration = true; //süreli oturum
+                options.LoginPath = "/Account/Login/"; //giriþ
+                options.LogoutPath = "/Account/logout/"; //çýkýþ
+                options.AccessDeniedPath = "/Account/AccessDenied"; //yetkisiz giriþ
+                options.SlidingExpiration = false; //süreli oturum
                 options.Cookie = new CookieBuilder
                 {
                     HttpOnly = true,

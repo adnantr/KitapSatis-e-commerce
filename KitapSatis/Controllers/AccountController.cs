@@ -14,7 +14,7 @@ namespace KitapSatis.Controllers
     
     public class AccountController : Controller
     {
-        private readonly ApplicationDbContext _db; //sepet işlemleri için
+        private readonly ApplicationDbContext _db;
         private readonly UserManager<User> _userManager; //user işlemleri
         private readonly SignInManager<User> _singInManager;//cookie işlemleri
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -64,8 +64,7 @@ namespace KitapSatis.Controllers
                 return View(model);
             }
 
-            //var result = await _singInManager.PasswordSignInAsync(model.UserName, model.Password, false,false);
-            var result = await _singInManager.PasswordSignInAsync(user, model.Password, true, false);
+            var result = await _singInManager.PasswordSignInAsync(user, model.Password, false, false);
             if (result.Succeeded)
             {
                 return Redirect(model.ReturnUrl??"~/");
@@ -91,6 +90,7 @@ namespace KitapSatis.Controllers
         {
             if (!ModelState.IsValid)
             {
+            
                 return View(model);
             }
             

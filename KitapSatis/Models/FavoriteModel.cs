@@ -5,7 +5,9 @@ namespace KitapSatis.Models
     public class FavoriteModel
     {
         public int FavoriteId { get; set; }
+        public List<Product> Products { get; set; }
         public List<FavoriteItemModel> FavoriteItems { get; set; }
+        
     }
     public class FavoriteItemModel
     {
@@ -14,5 +16,6 @@ namespace KitapSatis.Models
         public string Name { get; set; }
         public double Price { get; set; }
         public string ImageUrl { get; set; }
+        
     }
 }

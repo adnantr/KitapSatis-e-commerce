@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,6 +26,7 @@ namespace KitapSatis.Controllers
             _roleManager = roleManager;
             _userManager = userManager;
         }
+        
         public IActionResult Index()
         {
             return View();
@@ -90,7 +92,6 @@ namespace KitapSatis.Controllers
             return Redirect(model.RoleId);
             
         }
-        
         public async Task<IActionResult> RoleDelete(string id)
         {
             IdentityRole role = await _roleManager.FindByIdAsync(id);
@@ -134,10 +135,8 @@ namespace KitapSatis.Controllers
         }
         public IActionResult Product()
         {
-            //ViewBag.categoryName = _db.Categories.ToList();
             List<Product> objList = _db.Products.ToList();
             return View(objList);
-
         }
        
         public IActionResult AddUpdateProduct(int? id)
@@ -195,9 +194,12 @@ namespace KitapSatis.Controllers
 
         public IActionResult Category()
         {
-            ViewBag.categorylist = _db.Categories;
-            ViewBag.kindlist = _db.Kinds.ToList();
             List<Category> objList = _db.Categories.ToList();
+            return View(objList);
+        }
+        public IActionResult Kind()
+        {
+            List<Kind> objList = _db.Kinds.ToList();
             return View(objList);
         }
         public IActionResult AddUpdateCategory(int? id)
@@ -416,5 +418,9 @@ namespace KitapSatis.Controllers
             }
             return View(model);
         }
+
+
+        
     }
+
 }

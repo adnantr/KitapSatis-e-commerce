@@ -2,7 +2,7 @@
 
 <div class="row mt-4">
     <div class="col-md-6">
-        <img src="/img/productImages/@Model.Picture" width="300" height="500" class="img-responsive w-100"/>
+        <img src="/img/productImages/@Model.Picture" width="300" height="500" class="img-responsive w-100 border border-1"/>
     </div>
     <div class="col-md-6">
         <div class="row">
@@ -51,7 +51,10 @@
                  <form method="post" asp-controller="Cart" asp-action="AddCart" class="form-inline" >
                  <input type="hidden" name="ProductId" value="@Model.ProductId">
                  <div class="input-group mb-3">
-                     <input type="number" name="quantity" class="form-control" value="1" min="1" step="1" style="width:10px;">
+                     <div style="width: 10%;">
+                         <input type="number" name="quantity" class="form-control" value="1" min="1" step="1" >
+                     </div>
+                     
                      <div class="input-group-append">
                         <button type="submit" class="btn btn-primary btn">Sepete Ekle</button>
                      </div>

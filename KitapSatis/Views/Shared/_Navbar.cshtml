@@ -1,4 +1,3 @@
-
 <div class="container mt-2">
         <nav class="row navbar border border-dark">
             <div class="col-md-2">
@@ -15,14 +14,17 @@
             </div>
             
             <div class="col-md-3">
+
+                    <a asp-controller="Favorite"  asp-action="Index"> 
+                        <i class="bi bi-suit-heart btn btn-outline-danger"></i>
+                     </a>
+
                 
-                <a asp-controller="Favorite"  asp-action="Index"> @*Favoriler *@
-                    <i class="bi bi-suit-heart btn btn-outline-danger"></i>
-                </a>
-             
-                <a asp-controller="Cart"  asp-action="Index"> @*Sepet *@
+
+                 <a asp-controller="Cart"  asp-action="Index">
                     <i class="bi bi-cart btn btn-outline-primary">Sepet</i>
                 </a>
+
                   
                 @if(User.Identity.IsAuthenticated)
                 {

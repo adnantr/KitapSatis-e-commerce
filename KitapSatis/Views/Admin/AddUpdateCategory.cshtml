@@ -1,30 +1,31 @@
 ﻿ @model Category
-@{
-    var Title = "Kategori Oluştur";
-}
-  
 
+    <div class="col-12 bg-dark border-bottom text-center">
+        <h2 class="text-light">Kategori Düzenleme</h2>
+    </div>
+    <br /><br />
+    <div class="row p-3 m-lg-auto border border-dark rounded form-group" style="width: 40%;">
         <form method="post">
           <div asp-validation-summary="ModelOnly" class="text danger"></div>
           <input type="hidden" asp-for="CategoryId"/>
           @if(Model.CategoryId !=0)
             {
-                <p class="fs-3">Kategori Güncelle</p>
-                Title = "Kategori Güncelle";
+             <p class="fs-3">Kategori Güncelle</p>
             }
-            <div class="col-12 border-bottom text-center">
-                <h2 class="text-primary">@Title</h2>
-                </div>
-            <div class="form-group row">
+            else
+            {
+            <p class="fs-3">Kategori Oluştur</p>
+            }
+            
+            <div class="form-group row mb-3">
                 <div class="">
-                            <input asp-for="CategoryName" placeholder="Ürün isim" class="form-control" />
+                            <input asp-for="CategoryName" placeholder="Kategori isim" class="form-control" />
                             <span asp-validation-for="CategoryName" class="text-danger"></span>
                 </div>
-
-              
             </div>
+
              <div class="form-group row">
-                                <div class="col-4 offset-4">
+                        <div class="col-md-6 offset-md-3">
                             @if(Model.CategoryId != 0)
                             {
                                 <button type="submit" class="btn btn-primary">Güncelle</button>
@@ -33,13 +34,11 @@
                             {
                                 <button type="submit" class="btn btn-primary">Ekle</button>
                             }
+                            <a asp-action="category" class="btn btn-warning" role="button">Geri Dön</a>
                         </div>
-                            <a asp-action="category" class="btn-primary btn-success form-control">Geri Dön</a>
-
-
-                            </div>
-          
+             </div> 
         </form>
+    </div>
 
 
 

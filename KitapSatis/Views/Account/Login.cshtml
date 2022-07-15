@@ -3,7 +3,7 @@
     ViewData["Title"] = "User Login Page";
 }
 
-<div class="row">
+<div class="row m-lg-auto">
 
     <div class="col-md-6 mt-5" style="width: 20rem;">
         <img src="/img/login.png" class="card-img-top">
@@ -22,12 +22,13 @@
                 <input asp-for="Password" type="password" class="form-control" name="Password"  placeholder="Şifre">
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-            
+            <br />
             <button type="submit" class="btn btn-primary btn-lg">Giriş</button>
+            <a href="/account/ForgotPassword" class="btn btn-warning btn-lg">Şifreyi unuttum</a>
+            <a href="/account/register" class="text-decoration-none">Üye olmak için..</a>
             </form>
 
-            <a href="/account/ForgotPassword" class="btn btn-primary btn-lg">Şifreyi unuttum</a>
-            <a href="/account/register" class="text-decoration-none">Üye olmak için..</a>
+            
         
     </div>
 </div>

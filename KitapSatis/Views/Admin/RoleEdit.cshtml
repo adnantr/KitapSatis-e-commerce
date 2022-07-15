@@ -1,13 +1,16 @@
 ﻿@model RoleDetails
 
-<h1>Rol Düzenle</h1>
+<div class="col-12 bg-dark border-bottom text-center">
+    <h2 class="text-light">Rol Düzenle</h2>
+</div>
+<br /><br />
 <div class="row">
-    <div class="col-md-12 mt-5 ml-2">
+    <div class="row p-3 m-lg-auto border border-dark rounded form-group" style="width: 60%;">
 
         <form asp-controller="Admin" asp-action="RoleEdit" method="post">
             <input type="hidden" name="RoleId" value="@Model.Role.Id">
             <input type="hidden" name="RoleName" value="@Model.Role.Name">
-            <h6 class="bg-info text-white p-1">Ekle @Model.Role.Name</h6>
+            <h6 class="bg-secondary text-white p-1">@Model.Role.Name rolüne ait olmayanlar</h6>
             <table class="table table-bordered table-sm">
                 @if(Model.NonMembers.Count()==0)
                 {
@@ -19,7 +22,7 @@
                     <tr class="fw-bold">
                            <td>Kullanıcı Adı</td>
                            <td>Kullanıcı Id</td>
-                           <td>Seç</td>   
+                           <td>Ekle</td>   
                     </tr>
                     @foreach (var item in Model.NonMembers)
                    {
@@ -37,7 +40,7 @@
             <hr>
 
 
-             <h6 class="bg-info text-white p-1">Sil @Model.Role.Name</h6>
+             <h6 class="bg-secondary text-white p-1">@Model.Role.Name rolüne ait olanlar</h6>
             <table class="table table-bordered table-sm">
                 @if(Model.Members.Count()==0)
                 {
@@ -46,10 +49,10 @@
                     </tr>
                 }else
                 {
-                    <tr>
+                    <tr class="fw-bold">
                            <td>Kullanıcı Adı</td>
                            <td>Kullanıcı Id</td>
-                           <td>Seç</td>   
+                           <td>Kaldır</td>   
                     </tr>
                     @foreach (var item in Model.Members)
                    {

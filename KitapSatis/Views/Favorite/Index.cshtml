@@ -1,7 +1,6 @@
 ﻿@model FavoriteModel
 
-<h3>Favorilerim</h3>
-<hr />
+<br />
 
 
 @if(Model.FavoriteItems.Count==0)
@@ -43,11 +42,11 @@ else{
                 <td>@item.Name</td>
                 <td>@item.Price ₺</td>
                 <td>
-                    <form method="post" asp-controller="Cart" asp-action="AddCart" style="display:inline> 
-                 <input type="hidden" name="ProductId" value="@item.ProductId">
-                 <input type="hidden" name="quantity" value="1">
-                 <button type="submit" class="btn btn-primary btn-sm">Sepete Ekle</button>
-                    </form>
+                    @*<form method="post" asp-controller="Cart" asp-action="AddCart" style="display:inline> 
+                    <input type="hidden" name="ProductId" value="@item.ProductId>
+                     <input type="hidden" name="quantity" value="1">
+                     <button type="submit" class="btn btn-primary btn-sm">Sepete Ekle</button>
+                    </form>*@
 
                     <form asp-controller="Favorite" asp-action="DeleteFromFavorite" method="post">
                         <input type="hidden" name="productId" value="@item.ProductId">

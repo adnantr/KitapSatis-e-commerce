@@ -38,7 +38,6 @@ namespace KitapSatis.Controllers
                 }).ToList()
 
             }) ;
-
         }
         [HttpPost]
         public IActionResult AddFavorite(int productId)

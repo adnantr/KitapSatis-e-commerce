@@ -1,15 +1,28 @@
 ﻿ @model List<Category>
 
+@section ListCss
+{
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+}
+@section ListScripts
+{
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+        $('#myTable').DataTable();
+        } );
+    </script>
+}
+
+
 <div class="border p-4 bg-white">
   <div class="row">
       <div class="col-9">
-          <h2 class="text-dark">Kategori ve Tür listesi</h2>
+          <h2 class="text-dark">Kategori listesi</h2>
       </div>
 
       <div class="col-3 text-right">
-          @*@await Html.PartialAsync("AddUpdateCategory")*@
           <a asp-action="AddUpdateCategory" asp-controller="admin" class="btn btn-primary" >Kategori Ekle</a>
-          <a asp-action="AddUpdateKind" asp-controller="admin" class="btn btn-primary">Tür Ekle</a>
       </div>
   </div>
 
@@ -25,7 +38,7 @@
   <div>
       @if(Model.Count()>0)
         {
-                <table class="table container">
+                <table class="table container" id="myTable">
                   <thead>
                     <tr>
                       <th scope="col">Kategori Id</th>
@@ -34,7 +47,7 @@
                     </tr>
                   </thead>
                     <tbody>
-                @foreach (var item in ViewBag.categorylist)
+                @foreach (var item in Model)
                 {
                     <tr>
                       <th scope="row">@item.CategoryId</th>
@@ -53,40 +66,4 @@
             </table>
         }
     </div>
-
-
-
-    <div>
-      @if(Model.Count()>0)
-        {
-                <table class="table container">
-                  <thead>
-                    <tr>
-                      <th scope="col">Tür Id</th>
-                      <th scope="col">Tür Adı</th>
-                      <th scope="col"><i class="bi bi-arrow-down-up"></i></th>
-                    </tr>
-                  </thead>
-                    <tbody>
-                @foreach (var item in @ViewBag.kindlist)
-                {
-                    <tr>
-                      <th scope="row">@item.KindId</th>
-                      <td>@item.KindName</td>
-                      <td>
-                          
-                          <a asp-action="DeleteKind" asp-route-Id="@item.KindId" class="text-danger">
-                            <i class="bi bi-trash"></i>
-                          </a>
-                          <a asp-action="AddUpdateKind" asp-route-Id="@item.KindId" class="primary">
-                             <i class="bi bi-upload"></i>
-                          </a>
-                      </td>
-                    </tr>
-                }
-            </tbody>
-            </table>
-        }
-    </div>
-
 </div>

@@ -18,10 +18,8 @@ namespace KitapSatis.Data
         public DbSet<Kind> Kinds { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
-        public DbSet<CreditCard> CreditCards { get; set; }
-
-        public DbSet<CategoryProduct> CategoryProducts { get; set; }//Çok Çok İlişki
-        public DbSet<ProductKind> ProductKind { get; set; } //Çok Çok İlişki
+        public DbSet<CategoryProduct> CategoryProducts { get; set; }
+        public DbSet<ProductKind> ProductKind { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

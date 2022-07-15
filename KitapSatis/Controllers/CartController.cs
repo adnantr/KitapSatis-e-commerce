@@ -75,23 +75,20 @@ namespace KitapSatis.Controllers
             return View(orderModel);
         }
         [HttpPost]
-        public IActionResult Checkout(OrderModel model)
+        public IActionResult Checkout(int cartId)
         {
             //BİR ÖDEME API İLE DEVAM EDİLEBİLİR
             if (ModelState.IsValid)
             {
+                _cartService.ClearCart( cartId);
+
+                //SaveOrder(model, payment, userId);
+                //ClearCart(model.CartModel.CartId);
+                return View("Success");
                 
-                var userId = _userManager.GetUserId(User);
-                var payment = true;
-                if (payment == true)
-                {
-                    //SaveOrder(model, payment, userId);
-                    ClearCart(model.CartModel.CartId);
-                    return View("Success");
-                }
             }
             
-            return View(model);
+            return View();
         }
 
         private void ClearCart(int cartId)
